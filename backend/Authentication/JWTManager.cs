@@ -4,6 +4,7 @@ using System.Text;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using backend.Models;
+using backend.Entities;
 
 namespace backend.Authentication
 {

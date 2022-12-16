@@ -4,6 +4,7 @@ using System.Net;
 using System.Security.Claims;
 using backend.Models;
 using backend.Authentication;
+using backend.Entities;
 
 namespace backend.Controllers
 {
@@ -56,7 +57,7 @@ namespace backend.Controllers
         [Route("login")]
         public ActionResult Login([FromBody] UserLoginDTO dto)
         {
-            logger.LogInformation("Attempt to login: {a}", dto.Nickname);
+            logger.LogInformation("Attempt to login: {a}", dto.Email);
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -65,7 +66,7 @@ namespace backend.Controllers
 
             if (result != LoginResult.Success && result != LoginResult.SuccessShouldUpdatePassword)
             {
-                logger.LogInformation("Failed to login: {a} | {b}", dto.Nickname, result);
+                logger.LogInformation("Failed to login: {a} | {b}", dto.Email, result);
                 return CreateLoginResultObject(result);
             }
 
@@ -123,7 +124,6 @@ namespace backend.Controllers
         {
             Dictionary<string, string> value = new Dictionary<string, string>()
             {
-                { "code", ((int)result).ToString() },
                 { "message", result.ToString() }
             };
 
@@ -140,7 +140,6 @@ namespace backend.Controllers
         {
             Dictionary<string, string> value = new Dictionary<string, string>()
             {
-                { "code", ((int)result).ToString() },
                 { "message", result.ToString() }
             };
 
