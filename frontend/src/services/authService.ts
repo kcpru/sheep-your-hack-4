@@ -21,18 +21,18 @@ export interface IRegisterResponse {
 type TAccountType = "kid" | "adult"
 
 type TLoginInput = {
-  email: string;
-  password: string;
+  Email: string;
+  Password: string;
 }
 
 type TRegisterInput = {
-    username: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-    passwordConfirm: string,
-    type: TAccountType
+    Username: string,
+    FirstName: string,
+    LastName: string,
+    Email: string,
+    Password: string
+    PasswordConfirm: string,
+    // Type: TAccountType
 }
 
 export async function login(data: TLoginInput) {
