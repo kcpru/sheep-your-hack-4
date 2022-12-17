@@ -41,6 +41,7 @@ export async function post<T>(
   let result: Awaited<T> | null = null
   try {
     const headers = new Headers()
+    headers.append('content-type', 'application/json')
     if (options?.authorized) {
       headers.append('Authorization', getToken())
     }
