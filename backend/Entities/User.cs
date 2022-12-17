@@ -1,13 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using backend.DTO;
+using System.ComponentModel.DataAnnotations;
 
-namespace backend.Models
+namespace backend.Entities
 {
     public class User
     {
         public int Id { get; set; }
-
+        [Required]
         public string Nickname { get; set; }
+        [Required]
 
+        public string FirstName { get; set; }
+        [Required]
+
+        public string LastName { get; set; }
+
+        [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
@@ -33,6 +41,8 @@ namespace backend.Models
             User user = new User
             {
                 Nickname = dto.Nickname,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
                 Email = dto.Email,
                 Password = password,
                 RefreshToken = string.Empty,

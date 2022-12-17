@@ -1,4 +1,7 @@
-﻿using backend.Models;
+﻿using backend.Context;
+using backend.DTO;
+using backend.Entities;
+using backend.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Mail;
@@ -8,7 +11,7 @@ namespace backend.Authentication
 {
     public class AccountsManager
     {
-        private readonly TemporaryDatabase dbContext;
+        private readonly UserContext dbContext;
         private readonly IPasswordHasher<User> passwordHasher;
         private readonly JWTManager jwtManager;
 
@@ -23,7 +26,7 @@ namespace backend.Authentication
 
         private DateTime RefreshTokenExpiryDate => DateTime.Now.AddDays(1);
 
-        public AccountsManager(TemporaryDatabase dbContext, JWTManager jwtManager)
+        public AccountsManager(UserContext dbContext, JWTManager jwtManager)
         {
             this.dbContext = dbContext;
             passwordHasher = new PasswordHasher<User>();
@@ -49,7 +52,7 @@ namespace backend.Authentication
             try
             {
                 dbContext.Users.Add(user);
-                //dbContext.SaveChanges();
+                dbContext.SaveChanges();
             }
             catch
             {
@@ -65,7 +68,7 @@ namespace backend.Authentication
             token = null;
             u = null;
 
-            User? user = GetUser(dto.Nickname);
+            User? user = GetUser(dto.Email);
 
             if (user == null)
                 return LoginResult.AccountNotFound;
@@ -79,7 +82,7 @@ namespace backend.Authentication
 
                 user.RefreshToken = token.RefreshToken;
                 user.RefreshTokenExpiryDate = RefreshTokenExpiryDate;
-                //dbContext.SaveChanges();
+                dbContext.SaveChanges();
             }
 
             return result switch
@@ -94,10 +97,10 @@ namespace backend.Authentication
         {
             user.RefreshToken = newRefreshToken;
             user.RefreshTokenExpiryDate = RefreshTokenExpiryDate;
-            //dbContext.SaveChanges();
+            dbContext.SaveChanges();
         }
 
-        public User? GetUser(string nickname) => dbContext.Users.FirstOrDefault(u => u.Nickname == nickname);
+        public User? GetUser(string email) => dbContext.Users.FirstOrDefault(u => u.Email == email);
 
         public bool DoesEmailExists(string email) => dbContext.Users.Any(u => u.Email == email);
 
