@@ -40,7 +40,7 @@ namespace backend.Controllers
             var user = _userRepository.GetUserEmailByToken(token);
 
             var result = await _paymentRepository.GetAllIncomes(user.Id);
-            return Ok(new { id = result });
+            return Ok(result);
         }
     }
 }
