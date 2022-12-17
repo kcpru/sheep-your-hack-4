@@ -25,7 +25,7 @@ const AchievmentCard = ({ title, description, isEarned }) => {
       fontWeight={600}
       alignItems="center"
     >
-      <Icon as={icon} color={`${color}.600`} fontSize="3xl" mr={3} w={10} />
+      <Icon as={icon} color={`${color}.500`} fontSize="3xl" mr={3} w={10} />
 
       <Box>
         <Heading as="h3" fontSize="xl" color={`${color}.500`}>

@@ -179,8 +179,8 @@ const Register = () => {
           mt="8"
           w="full"
           border="5px solid"
-          borderColor="green.300"
-          bg="green.200"
+          borderColor="green.200"
+          bg="green.100"
           color="green.500"
           _hover={{
             bg: 'green.300',
