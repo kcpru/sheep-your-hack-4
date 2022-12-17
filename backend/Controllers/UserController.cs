@@ -5,6 +5,7 @@ using System.Security.Claims;
 using backend.Models;
 using backend.Authentication;
 using backend.Entities;
+using backend.DTO;
 
 namespace backend.Controllers
 {
@@ -74,11 +75,10 @@ namespace backend.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         [Route("getuser")]
         public ActionResult<UserInfoResult> GetUser()
         {
-            string token = Request.Headers["Authorization"].ToString()[7..];
+            string token = Request.Headers["Authorization"].ToString();
             ClaimsPrincipal? principal = jwtManager.GetPrincipalFromToken(token, false);
 
             if (principal == null || principal.Identity == null || principal.Identity.Name == null)

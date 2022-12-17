@@ -1,4 +1,4 @@
-﻿using backend.Models;
+﻿using backend.DTO;
 using System.ComponentModel.DataAnnotations;
 
 namespace backend.Entities

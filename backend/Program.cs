@@ -1,5 +1,7 @@
 using backend.Authentication;
 using backend.Context;
+using backend.Interfaces;
+using backend.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +20,10 @@ namespace backend
             builder.Services.AddSingleton<JWTManager>();
             builder.Services.AddScoped<AccountsManager>();
 
+            builder.Services.AddScoped<IGoalsRepository, GoalsRepository>();
+            builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+
             builder.Services.AddLogging(configure =>
             {
                 configure.AddConsole();
@@ -27,6 +33,16 @@ namespace backend
             //TODO fetch from configuration manager
             var cnn = "Server=127.0.0.1;Port=5432;User Id=postgres;Password=admin;Database=postgres";
             builder.Services.AddDbContext<UserContext>(opt =>
+            {
+                opt.UseNpgsql(cnn.ToString());
+            });
+
+            builder.Services.AddDbContext<PaymentsDbContext>(opt =>
+            {
+                opt.UseNpgsql(cnn.ToString());
+            });
+
+            builder.Services.AddDbContext<GoalsDbContext>(opt =>
             {
                 opt.UseNpgsql(cnn.ToString());
             });
