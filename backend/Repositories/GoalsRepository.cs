@@ -15,12 +15,12 @@ namespace backend.Repositories
             _context = context;
         }
 
-        public async Task<bool> CreateGoal(GoalsDTO goal)
+        public async Task<int> CreateGoal(GoalsDTO goal)
         {
             var entity = MapToEntity(goal);
             _context.Goals.Add(entity);
             await _context.SaveChangesAsync();
-            return true;
+            return entity.Id;
         }
 
         public async Task<IEnumerable<GoalsDTO>> GetAllGoals(int UserId)

@@ -9,11 +9,11 @@ using backend.Context;
 
 #nullable disable
 
-namespace backend.Migrations
+namespace backend.Migrations.User
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20221216195026_ChangedFieldToReadOnly")]
-    partial class ChangedFieldToReadOnly
+    [Migration("20221217033617_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

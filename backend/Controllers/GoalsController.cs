@@ -43,13 +43,10 @@ namespace backend.Controllers
 
         [HttpPost]
         [Route("create")]
-        public ActionResult Create([FromBody] GoalsDTO goals)
+        public IActionResult Create([FromBody] GoalsDTO goals)
         {
             var result = _goalRepository.CreateGoal(goals).Result;
-            if (result)
-                return Ok();
-            else
-                return BadRequest();
+            return Ok(result);
         }
 
         //[HttpPut]
