@@ -17,7 +17,7 @@ export interface IRegisterResponse {
   Id: string
 }
 
-type TAccountType = 'kid' | 'adult'
+type TAccountType = 'child' | 'adult'
 
 export type TLoginInput = {
   email: string
@@ -45,7 +45,7 @@ export async function login(data: TLoginInput) {
       body: JSON.stringify(data),
     })
 
-    if (res !== null) console.error('Failed to login!')
+    if (res === null) console.error('Failed to login!')
     saveToken(res?.token as string)
 
     result = res
