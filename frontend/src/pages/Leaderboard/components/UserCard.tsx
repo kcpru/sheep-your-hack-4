@@ -1,6 +1,4 @@
-import { Box, Flex, HStack, Heading, Image, Spacer } from '@chakra-ui/react'
-
-import { FaGratipay } from 'react-icons/fa'
+import { Flex, HStack, Heading, Image, Spacer } from '@chakra-ui/react'
 
 const UserCard = ({ nickname, points, image, order }) => {
   let color = {
@@ -14,7 +12,7 @@ const UserCard = ({ nickname, points, image, order }) => {
     case 0:
       color = {
         bg: 'yellow.200',
-        font: 'yellow.600',
+        font: 'yellow.500',
         card: 'yellow.300',
         fontCard: 'yellow.400',
       }
@@ -22,7 +20,7 @@ const UserCard = ({ nickname, points, image, order }) => {
     case 1:
       color = {
         bg: 'gray.300',
-        font: 'gray.50',
+        font: 'gray.500',
         card: 'gray.400',
         fontCard: 'gray.200',
       }
@@ -30,7 +28,7 @@ const UserCard = ({ nickname, points, image, order }) => {
     case 2:
       color = {
         bg: 'orange.400',
-        font: 'orange.50',
+        font: 'orange.100',
         card: 'orange.500',
         fontCard: 'orange.200',
       }

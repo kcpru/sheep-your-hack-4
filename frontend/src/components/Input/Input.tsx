@@ -37,7 +37,7 @@ const Input = ({
         <InputLeftElement pointerEvents="none">
           <ChakraIcon
             as={icon}
-            transform="translate(2px, 2px)"
+            transform="translate(3px, 4px)"
             fontSize={26}
             color={useColorModeValue('gray.600', 'gray.300')}
           />
