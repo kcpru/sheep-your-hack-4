@@ -46,9 +46,9 @@ const Register = () => {
       label: 'Imię',
       placeholder: 'Jan',
       icon: BsFillPersonFill,
-      value: formData?.firstname,
-      onChange: (e) =>
-        setFormData((prev) => ({
+      value: formData?.firstname as string,
+      onChange: (e: any) =>
+        setFormData((prev: any) => ({
           ...prev,
           firstname: e.target.value,
         })),
@@ -59,9 +59,9 @@ const Register = () => {
       label: 'Nazwisko',
       placeholder: 'Kowalski',
       icon: BsFillPersonFill,
-      value: formData?.lastname,
-      onChange: (e) =>
-        setFormData((prev) => ({
+      value: formData?.lastname as string,
+      onChange: (e: any) =>
+        setFormData((prev: any) => ({
           ...prev,
           lastname: e.target.value,
         })),
@@ -72,9 +72,9 @@ const Register = () => {
       label: 'Email',
       placeholder: 'testowy@email.pl',
       icon: MdAlternateEmail,
-      value: formData?.email,
-      onChange: (e) =>
-        setFormData((prev) => ({
+      value: formData?.email as string,
+      onChange: (e: any) =>
+        setFormData((prev: any) => ({
           ...prev,
           email: e.target.value,
         })),
@@ -85,9 +85,9 @@ const Register = () => {
       label: 'Hasło',
       placeholder: '********',
       icon: IoMdUnlock,
-      value: formData?.password,
-      onChange: (e) =>
-        setFormData((prev) => ({
+      value: formData?.password as string,
+      onChange: (e: any) =>
+        setFormData((prev: any) => ({
           ...prev,
           password: e.target.value,
         })),
@@ -98,9 +98,9 @@ const Register = () => {
       label: 'Powtórz hasło',
       placeholder: '********',
       icon: IoMdUnlock,
-      value: formData?.passwordConfirm,
-      onChange: (e) =>
-        setFormData((prev) => ({
+      value: formData?.passwordConfirm as string,
+      onChange: (e: any) =>
+        setFormData((prev: any) => ({
           ...prev,
           passwordConfirm: e.target.value,
         })),

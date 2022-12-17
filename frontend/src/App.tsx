@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 
 import { Header, Layout } from './components'
 
@@ -10,11 +11,18 @@ import Onboading from './pages/Onboarding'
 import Register from './pages/Register'
 
 const App = () => {
+  const [path, setPath] = useState<string>(window.location.pathname)
+
+  useEffect(() => {
+    setPath(window.location.pathname)
+  }, [window.location])
+
+  const PATHS_WITH_NAV = ['/dashboard']
+
   return (
     <AuthContextProvider>
       <BrowserRouter>
-        <Header siteTitle="Chaos" />
-
+        {PATHS_WITH_NAV.includes(path) && <Header />}
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />

@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import { useLocation, useSearchParams } from 'react-router-dom'
 
 import ExpensesForm from './subpages/ExpensesForm'
+import IncomeForm from './subpages/IncomeForm'
 import OnboadingGoalForm from './subpages/OnboardingGoalForm'
 import Welcome from './subpages/Welcome'
 
@@ -12,7 +13,14 @@ type subpageStep = {
 }
 
 const Onboading = () => {
-  const [activeSubPage, setActiveSubPage] = useState<string>()
+  const [formData, setFormData] = useState()
+
+  const handleFormChange = (e: any, name: string) => {
+    // setFormData((prev: any) => {
+    //     ...prev,
+    //     name: e.target.value
+    // })
+  }
 
   const location = useLocation()
   const [urlQuery] = useSearchParams()
@@ -29,12 +37,10 @@ const Onboading = () => {
         <title>Onboarding</title>
       </Helmet>
 
-      <h1>Home</h1>
-      <p>Home page</p>
-
       {step === 'welcome' && <Welcome />}
-      {step === 'goal' && <OnboadingGoalForm />}
+      {step === 'income' && <IncomeForm />}
       {step === 'expenses' && <ExpensesForm />}
+      {step === 'goal' && <OnboadingGoalForm />}
     </>
   )
 }

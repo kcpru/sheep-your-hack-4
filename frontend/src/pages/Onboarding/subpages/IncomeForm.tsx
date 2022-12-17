@@ -5,7 +5,7 @@ import { Button, Heading, Input, Text } from '@chakra-ui/react'
 
 import { FaCoins } from 'react-icons/fa'
 
-const ExpensesForm = () => {
+const IncomeForm = () => {
   const inputProps = {
     type: 'number',
     name: 'income',
@@ -23,7 +23,7 @@ const ExpensesForm = () => {
   const navigate = useNavigate()
 
   const handleNextStep = () => {
-    navigate('/onboarding?step=goal')
+    navigate('/onboarding?step=expenses')
   }
   return (
     <>
@@ -31,10 +31,10 @@ const ExpensesForm = () => {
         <title>ExpensesForm</title>
       </Helmet>
 
-      <Heading as={'h3'}>Krok drugi:</Heading>
+      <Heading as={'h3'}>Krok pierwszy:</Heading>
       <Text>
-        Świetnie ci idzie! Kolejnym krokiem jest policzenie twoich miesięcznych
-        wydatków, zastanów się ile wydałeś w ostatnim miesiącu
+        Wprowadź twoje miesięczne przychody, na przykład zarobek czy kieszonkowe
+        od rodziców
       </Text>
       <Input {...inputProps} />
 
@@ -55,10 +55,10 @@ const ExpensesForm = () => {
         }}
         onClick={() => handleNextStep()}
       >
-        Do ostatniego kroku
+        Dalej
       </Button>
     </>
   )
 }
 
-export default ExpensesForm
+export default IncomeForm

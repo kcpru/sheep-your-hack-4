@@ -1,6 +1,6 @@
 import http from './httpService'
 
-const AUTH_URL = ''
+const AUTH_URL = 'http://localhost:5280/user/'
 export interface ILoginResponse {
   code: string
   message: string
@@ -26,8 +26,8 @@ export type TLoginInput = {
 
 export type TRegisterInput = {
   username: string
-  firstName: string
-  lastName: string
+  firstname: string
+  lastname: string
   email: string
   password: string
   passwordConfirm: string
@@ -41,7 +41,7 @@ function saveToken(token: string) {
 export async function login(data: TLoginInput) {
   let result: ILoginResponse | null
   try {
-    const res = await http.post<ILoginResponse>(AUTH_URL + '/login', {
+    const res = await http.post<ILoginResponse>(AUTH_URL + 'login', {
       body: JSON.stringify(data),
     })
 
@@ -60,7 +60,7 @@ export async function login(data: TLoginInput) {
 
 export async function register(data: TRegisterInput) {
   try {
-    await http.post<IRegisterResponse>(AUTH_URL + '/register', {
+    await http.post<IRegisterResponse>(AUTH_URL + 'register', {
       body: JSON.stringify(data),
     })
   } catch (e) {
