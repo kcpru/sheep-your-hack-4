@@ -1,5 +1,5 @@
 const fonts = {
-  heading: `'Bitter', serif`,
+  heading: `'Poppins', serif`,
   body: `'Poppins', sans-serif`,
 }
 
