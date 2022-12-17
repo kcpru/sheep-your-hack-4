@@ -25,7 +25,7 @@ export type TLoginInput = {
 }
 
 export type TRegisterInput = {
-  username: string
+  nickname: string
   firstname: string
   lastname: string
   email: string

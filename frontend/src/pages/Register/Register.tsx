@@ -26,7 +26,8 @@ const Register = () => {
   const [formData, setFormData] = useState<TRegisterInput>()
   const navigate = useNavigate()
 
-  const handleFormSend = async () => {
+  const handleFormSend = async (e: any) => {
+    e.preventDefault()
     if (formData)
       await register(formData)
         .then(() => navigate('/login'))
@@ -35,7 +36,10 @@ const Register = () => {
 
   const { getRadioProps } = useRadioGroup({
     onChange: function (value) {
-      // formik.setFieldValue('service', value)
+      setFormData((prev: any) => ({
+        ...prev,
+        role: value,
+      }))
     },
   })
 
@@ -77,6 +81,19 @@ const Register = () => {
         setFormData((prev: any) => ({
           ...prev,
           email: e.target.value,
+        })),
+    },
+    {
+      type: 'text',
+      name: 'nickname',
+      label: 'nickname',
+      placeholder: 'TestowyNick',
+      icon: MdAlternateEmail,
+      value: formData?.nickname as string,
+      onChange: (e: any) =>
+        setFormData((prev: any) => ({
+          ...prev,
+          nickname: e.target.value,
         })),
     },
     {
@@ -143,7 +160,7 @@ const Register = () => {
                   },
                   {
                     name: 'Dzieckiem',
-                    value: 'kid',
+                    value: 'child',
                   },
                 ].map(({ name, value }) => (
                   <CheckboxCard key={value} {...getRadioProps({ value })}>
