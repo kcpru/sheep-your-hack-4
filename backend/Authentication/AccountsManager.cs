@@ -33,7 +33,6 @@ namespace backend.Authentication
             this.jwtManager = jwtManager;
         }
 
-        public IEnumerable<User> AllUsers => dbContext.Users;
 
         public RegisterResult Register([NotNull] UserRegisterDTO dto, out int newUserId)
         {

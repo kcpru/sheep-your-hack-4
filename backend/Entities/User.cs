@@ -9,6 +9,7 @@ namespace backend.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
+        public int ParentId { get; set; }
         [Required]
         public string Nickname { get; set; }
         [Required]
@@ -45,6 +46,7 @@ namespace backend.Entities
             User user = new User
             {
                 Nickname = dto.Nickname,
+                ParentId = dto.ParentId,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
