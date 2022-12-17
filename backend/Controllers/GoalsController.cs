@@ -1,10 +1,12 @@
 ﻿using backend.DTO;
 using backend.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
+    [EnableCors("AllowAllOrigins")]
     [ApiController]
     [Route("[controller]")]
     public class GoalsController : Controller
