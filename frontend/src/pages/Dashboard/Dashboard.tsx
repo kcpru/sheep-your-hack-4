@@ -60,8 +60,8 @@ const Dashboard = () => {
             image:
               'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F1202%2F6102%2Fproducts%2Fvans-old-skool-black-white-2.jpg%3Fv%3D1482167737&f=1&nofb=1&ipt=a367918f34505059761dbe2844fd6e19fe0f135e91e474305069ad2659d93352&ipo=images',
           },
-        ].map((props) => (
-          <Goal {...props} />
+        ].map((props, idx) => (
+          <Goal {...props} key={idx} />
         ))}
       </VStack>
     </>

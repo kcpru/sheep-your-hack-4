@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import Login from './pages/Login'
 import Onboading from './pages/Onboarding'
 import Register from './pages/Register'
+import Transaction from './pages/Transaction'
 
 const App = () => {
   const [path, setPath] = useState<string>(window.location.pathname)
@@ -17,7 +18,12 @@ const App = () => {
     setPath(window.location.pathname)
   }, [window.location])
 
-  const PATHS_WITH_NAV = ['/dashboard', '/leaderboard', '/achievements']
+  const PATHS_WITH_NAV = [
+    '/dashboard',
+    '/leaderboard',
+    '/achievements',
+    '/transaction',
+  ]
 
   return (
     <AuthContextProvider>
@@ -28,6 +34,8 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/transaction" element={<Transaction />} />
+
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/achievements" element={<Achievements />} />
             <Route path="/onboarding" element={<Onboading />} />

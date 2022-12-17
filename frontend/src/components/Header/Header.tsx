@@ -44,7 +44,7 @@ const Header: HeaderComponent = () => {
 
       <ChakraLink
         as={NavLink}
-        to={'/money'}
+        to={'/transaction'}
         w="20"
         h="20"
         transform={'translateY(-30%)'}
@@ -58,7 +58,7 @@ const Header: HeaderComponent = () => {
       >
         <Icon as={HiSwitchVertical} fontSize="4xl" color="orange.400" />
 
-        {/* {currentPath === '/money' && (
+        {/* {currentPath === '/transaction' && (
           <Box
             as={motion.div}
             position="absolute"
