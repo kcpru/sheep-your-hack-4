@@ -43,25 +43,35 @@ namespace backend.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult Create([FromBody] GoalsDTO goals)
+        public async Task<IActionResult> Create([FromBody] GoalsDTO goal)
         {
-            var result = _goalRepository.CreateGoal(goals).Result;
-            return Ok(result);
+            var result = await _goalRepository.CreateGoal(goal);
+            return Ok(new { id=result});
         }
 
-        //[HttpPut]
-        //[Route("modify/{id}")]
-        //public IActionResult ModifyById([FromBody])
-        //{
+        [HttpPut]
+        [Route("modify/{id}")]
+        public async Task<IActionResult> ModifyById([FromBody] GoalsDTO goal)
+        {
+            var result = await _goalRepository.ModifyGoal(goal);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
 
-        //}
-
-        //[HttpDelete]
-        //[Route("delete/{id}")]
-        //public IActionResult DeleteById([FromBody])
-        //{
-
-        //}
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public async Task<IActionResult> DeleteById([FromRoute] int id)
+        {
+            var result = await _goalRepository.DeleteGoal(id);
+            if (!result)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
 
     }
 }
