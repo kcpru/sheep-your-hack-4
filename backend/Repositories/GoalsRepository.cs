@@ -64,5 +64,33 @@ namespace backend.Repositories
                     SavingPerWeek = goal.SavingPerWeek
             };
         }
+
+        public async Task<bool> ModifyGoal(GoalsDTO goal)
+        {
+            var entity = await _context.Goals.FirstOrDefaultAsync(x => x.Id == goal.Id);
+            if (entity == null)
+            {
+                return false;
+            }
+            entity.Name = goal.Name;
+            entity.Cost = goal.Cost;
+            entity.CurrentAmount = goal.CurrentAmount;
+            entity.Deadline = goal.Deadline;
+            entity.SavingPerWeek = goal.SavingPerWeek;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteGoal(int id)
+        {
+            var goal = await _context.Goals.FirstOrDefaultAsync(x => x.Id == id);
+            if (goal == null)
+            {
+                return false;
+            }
+            _context.Remove(goal);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
