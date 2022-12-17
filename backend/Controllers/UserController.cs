@@ -6,9 +6,11 @@ using backend.Models;
 using backend.Authentication;
 using backend.Entities;
 using backend.DTO;
+using Microsoft.AspNetCore.Cors;
 
 namespace backend.Controllers
 {
+    [EnableCors("AllowAllOrigins")]
     [ApiController]
     [Route("[controller]")]
     public class UserController : Controller

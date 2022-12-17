@@ -27,8 +27,8 @@ namespace backend
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("http://example.com"));
+                options.AddPolicy("AllowAllOrigins",
+                    builder => builder.AllowAnyOrigin());
             });
 
             builder.Services.AddLogging(configure =>
@@ -38,7 +38,7 @@ namespace backend
             });
 
             //TODO fetch from configuration manager
-            var cnn = "Server=127.0.0.1;Port=5432;User Id=postgres;Password=admin;Database=postgres";
+            var cnn = "Server=127.0.0.1;Port=5432;User Id=postgres;Password=postgres;Database=postgres";
             builder.Services.AddDbContext<UserContext>(opt =>
             {
                 opt.UseNpgsql(cnn.ToString());
@@ -59,6 +59,7 @@ namespace backend
 
             WebApplication? app = builder.Build();
             //app.MigrationDatabase();
+            app.UseCors();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
