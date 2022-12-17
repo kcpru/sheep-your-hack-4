@@ -85,28 +85,28 @@ const NAV_LINKS = {
   left: [
     {
       label: 'Panel',
-      path: '/',
-      color: 'green',
+      path: '/dashboard',
+      color: 'teal',
       icon: MdDashboard,
     },
     {
       label: 'Wyniki',
-      path: '/results',
-      color: 'red',
+      path: '/leaderboard',
+      color: 'purple',
       icon: MdLeaderboard,
     },
   ],
   right: [
     {
       label: 'Cele',
-      path: '/goals',
-      color: 'blue',
+      path: '/achievements',
+      color: 'green',
       icon: BsFillStarFill,
     },
     {
       label: 'Ustawienia',
       path: '/settings',
-      color: 'purple',
+      color: 'red',
       icon: IoMdSettings,
     },
   ],
