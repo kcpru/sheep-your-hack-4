@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace backend.Controllers
 {
-    [EnableCors("AllowAllOrigins")]
+    [EnableCors("AllowAll")]
     [ApiController]
     [Route("[controller]")]
     public class UserController : Controller

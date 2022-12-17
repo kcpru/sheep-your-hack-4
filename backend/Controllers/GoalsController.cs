@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    [EnableCors("AllowAllOrigins")]
+    [EnableCors("AllowAll")]
     [ApiController]
     [Route("[controller]")]
     public class GoalsController : Controller
