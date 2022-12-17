@@ -9,6 +9,7 @@ import { MdAlternateEmail } from 'react-icons/md'
 
 import { Input } from '../../components'
 
+import { useAuth } from '../../hooks'
 import { TLoginInput, login } from '../../services/authService'
 
 const Home = () => {
@@ -16,13 +17,17 @@ const Home = () => {
   const navigate = useNavigate()
   const { setUser } = useAuth()
 
-  const handleFormSend = async (e) => {
+  const handleFormSend = async (e: any) => {
     e.preventDefault()
 
-    if (formData)
-      await login(formData)
-        .then(() => navigate('/login'))
-        .catch(console.error)
+    if (formData) {
+      const user = await login(formData).catch(console.error)
+
+      if (user) {
+        setUser(user)
+        navigate('/onboarding?step=welcome')
+      }
+    }
   }
 
   const loginInputProps = [
@@ -32,9 +37,9 @@ const Home = () => {
       label: 'Email',
       placeholder: 'testowy@email.pl',
       icon: MdAlternateEmail,
-      value: formData?.email,
-      onChange: (e) =>
-        setFormData((prev) => ({
+      value: formData?.email as string,
+      onChange: (e: any) =>
+        setFormData((prev: any) => ({
           ...prev,
           email: e.target.value,
         })),
@@ -45,9 +50,9 @@ const Home = () => {
       label: 'Hasło',
       placeholder: '********',
       icon: IoMdUnlock,
-      value: formData?.password,
-      onChange: (e) =>
-        setFormData((prev) => ({
+      value: formData?.password as string,
+      onChange: (e: any) =>
+        setFormData((prev: any) => ({
           ...prev,
           password: e.target.value,
         })),

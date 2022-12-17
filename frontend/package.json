@@ -23,12 +23,14 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.7.1",
+    "react-lottie": "^1.2.3",
     "react-router-dom": "^6.4.5"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.0.0",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
+    "@types/react-lottie": "^1.2.6",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@vitejs/plugin-react-swc": "^3.0.0",
     "eslint": "^8.29.0",
