@@ -71,6 +71,19 @@ const Register = () => {
         })),
     },
     {
+      type: 'text',
+      name: 'nickname',
+      label: 'nickname',
+      placeholder: 'TestowyNick',
+      icon: BsFillPersonFill,
+      value: formData?.nickname as string,
+      onChange: (e: any) =>
+        setFormData((prev: any) => ({
+          ...prev,
+          nickname: e.target.value,
+        })),
+    },
+    {
       type: 'email',
       name: 'email',
       label: 'Email',
@@ -83,19 +96,7 @@ const Register = () => {
           email: e.target.value,
         })),
     },
-    {
-      type: 'text',
-      name: 'nickname',
-      label: 'nickname',
-      placeholder: 'TestowyNick',
-      icon: MdAlternateEmail,
-      value: formData?.nickname as string,
-      onChange: (e: any) =>
-        setFormData((prev: any) => ({
-          ...prev,
-          nickname: e.target.value,
-        })),
-    },
+
     {
       type: 'password',
       name: 'password',
