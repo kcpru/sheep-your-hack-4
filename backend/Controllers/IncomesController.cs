@@ -1,11 +1,13 @@
 ﻿using backend.DTO;
 using backend.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers
 {
-    [Route("api/[controller]")]
+    [EnableCors("AllowAll")]
+    [Route("[controller]")]
     [ApiController]
     public class IncomesController : ControllerBase
     {
@@ -23,7 +25,10 @@ namespace backend.Controllers
         [Route("create")]
         public async Task<IActionResult> Insert([FromBody] IncomesDTO income)
         {
-            await _paymentRepository.InsertIncome(income);
+            string token = Request.Headers["Authorization"].ToString();
+            var user = _userRepository.GetUserEmailByToken(token);
+
+            await _paymentRepository.InsertIncome(income, user.Id);
             return Ok();
         }
 

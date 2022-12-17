@@ -15,9 +15,9 @@ namespace backend.Repositories
             _context = context;
         }
 
-        public async Task<int> CreateGoal(GoalsDTO goal)
+        public async Task<int> CreateGoal(GoalsDTO goal, int userId)
         {
-            var entity = MapToEntity(goal);
+            var entity = MapToEntity(goal, userId);
             _context.Goals.Add(entity);
             await _context.SaveChangesAsync();
             return entity.Id;
@@ -52,12 +52,13 @@ namespace backend.Repositories
             }
             return data;
         }
-        private static Goals MapToEntity(GoalsDTO goal)
+        private static Goals MapToEntity(GoalsDTO goal, int userId)
         {
             return new Goals()
             {
                 Id = goal.Id,
                 Name = goal.Name,
+                UserId = userId,
                 ImageUrl = goal.ImageUrl,
                 Cost = goal.Cost,
                 CurrentAmount = goal.CurrentAmount,

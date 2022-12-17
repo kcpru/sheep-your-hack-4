@@ -45,7 +45,10 @@ namespace backend.Controllers
         [Route("create")]
         public async Task<IActionResult> Create([FromBody] GoalsDTO goal)
         {
-            var result = await _goalRepository.CreateGoal(goal);
+            string token = Request.Headers["Authorization"].ToString();
+            var user = _userRepository.GetUserEmailByToken(token);
+
+            var result = await _goalRepository.CreateGoal(goal, user.Id);
             return Ok(new { id=result});
         }
 

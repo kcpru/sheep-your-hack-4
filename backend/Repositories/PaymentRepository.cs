@@ -27,17 +27,17 @@ namespace backend.Repositories
             return MapIncomesToDto(data);
         }
 
-        public async Task<bool> InsertExpense(ExpensesDTO expens)
+        public async Task<bool> InsertExpense(ExpensesDTO expens, int userId)
         {
-            var entity = MapExpensesDtoToEntity(expens);
+            var entity = MapExpensesDtoToEntity(expens, userId);
             _context.Expenses.Add(entity);
             await _context.SaveChangesAsync();
             return true;
         }
 
-        public async Task<bool> InsertIncome(IncomesDTO incomes)
+        public async Task<bool> InsertIncome(IncomesDTO incomes, int userId)
         {
-            var entity = MapIncomesDtoToEntity(incomes);
+            var entity = MapIncomesDtoToEntity(incomes, userId);
             _context.Incomes.Add(entity);
             await _context.SaveChangesAsync();
             return true;
@@ -51,7 +51,6 @@ namespace backend.Repositories
                 result.Add(new ExpensesDTO()
                 {
                     Id = expens.Id,
-                    UserId = expens.UserId,
                     Sum = expens.Sum,
                     Date = expens.Date
                 });
@@ -67,30 +66,29 @@ namespace backend.Repositories
                 result.Add(new IncomesDTO()
                 {
                     Id = income.Id,
-                    UserId = income.UserId,
                     Sum = income.Sum,
                     Date = income.Date
                 });
             }
             return result;
         }
-        private static Expenses MapExpensesDtoToEntity(ExpensesDTO expens)
+        private static Expenses MapExpensesDtoToEntity(ExpensesDTO expens, int userId)
         {
             return new Expenses()
             {
                 Id = expens.Id,
-                UserId = expens.UserId,
+                UserId = userId,
                 Sum = expens.Sum,
                 Date = expens.Date
             };
         }
 
-        private static Incomes MapIncomesDtoToEntity(IncomesDTO income)
+        private static Incomes MapIncomesDtoToEntity(IncomesDTO income, int userId)
         {
             return new Incomes()
             {
                 Id = income.Id,
-                UserId = income.UserId,
+                UserId = userId,
                 Sum = income.Sum,
                 Date = income.Date
             };
