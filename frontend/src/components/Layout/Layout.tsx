@@ -6,7 +6,10 @@ import { LayoutComponent } from './Layout.types'
 
 const Layout: LayoutComponent = () => {
   return (
-    <Container maxWidth={{ base: 'xs', sm: 'sm', lg: '2xl', xl: '4xl' }}>
+    <Container
+      maxWidth={{ base: 'full', sm: 'sm', lg: '2xl', xl: '4xl' }}
+      p="6"
+    >
       <Outlet />
     </Container>
   )

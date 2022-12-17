@@ -3,7 +3,9 @@ import { Helmet } from 'react-helmet'
 import Lottie from 'react-lottie'
 import { useNavigate } from 'react-router-dom'
 
-import { Box, Button, Heading, Text } from '@chakra-ui/react'
+import { Box, Container, Heading, Text, VStack } from '@chakra-ui/react'
+
+import { NavButton } from '../components'
 
 import confettiAnimation from '../../../assets/lottie/confetti.json'
 
@@ -39,38 +41,33 @@ const OnboadingGoalForm = () => {
           zIndex={999}
           height="100%"
           width={'100%'}
-          position="absolute"
+          position="fixed"
+          top={0}
+          left={0}
           backgroundColor={'white'}
         >
           <Lottie options={defaultOptions} height="100%" width={'100%'} />
         </Box>
       )}
-
-      <Heading as={'h3'}>Stwórz swój pierwszy cel!</Heading>
-      <Text>
-        Wprowadź twoje miesięczne przychody, na przykład zarobek czy kieszonkowe
-        od rodziców
-      </Text>
-
-      <Button
-        type="submit"
-        colorScheme="green"
-        mt="8"
-        w="full"
-        border="5px solid"
-        borderColor="green.300"
-        bg="green.200"
-        color="green.500"
-        _hover={{
-          bg: 'green.300',
-        }}
-        _active={{
-          bg: 'green.300',
-        }}
-        onClick={() => handleNextStep()}
+      <Container
+        maxW="xs"
+        textAlign={'center'}
+        color="gray.500"
+        h="90vh"
+        as={VStack}
+        justifyContent="center"
+        spacing={7}
       >
-        Dalej
-      </Button>
+        <Heading as={'h3'} color="gray.600">
+          Stwórz swój pierwszy cel!
+        </Heading>
+        <Text>
+          Wprowadź twoje miesięczne przychody, na przykład zarobek czy
+          kieszonkowe od rodziców
+        </Text>
+
+        <NavButton onClick={() => handleNextStep()}>Zakończ</NavButton>
+      </Container>
     </>
   )
 }

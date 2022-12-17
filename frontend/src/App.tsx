@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { Header, Layout } from './components'
 
 import { AuthContextProvider } from './context'
-import { About, Home, NoMatch } from './pages'
+import { About, Achievements, Home, Leaderboard, NoMatch } from './pages'
 import Dashboard from './pages/Dashboard/Dashboard'
 import Login from './pages/Login'
 import Onboading from './pages/Onboarding'
@@ -17,7 +17,7 @@ const App = () => {
     setPath(window.location.pathname)
   }, [window.location])
 
-  const PATHS_WITH_NAV = ['/dashboard']
+  const PATHS_WITH_NAV = ['/dashboard', '/leaderboard', '/achievements']
 
   return (
     <AuthContextProvider>
@@ -28,6 +28,8 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/achievements" element={<Achievements />} />
             <Route path="/onboarding" element={<Onboading />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
