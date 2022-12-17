@@ -24,6 +24,7 @@ namespace backend
             builder.Services.AddScoped<IGoalsRepository, GoalsRepository>();
             builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IAchievmentsRepository, AchievmentsRepository>();
 
             builder.Services.AddCors(options =>
             {
@@ -54,11 +55,39 @@ namespace backend
                 opt.UseNpgsql(cnn.ToString());
             });
 
+            builder.Services.AddDbContext<AchievmentsDbContext>(opt =>
+            {
+                opt.UseNpgsql(cnn.ToString());
+            });
+
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 
             WebApplication? app = builder.Build();
-            //app.MigrationDatabase();
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<GoalsDbContext>();
+                db.Database.Migrate();
+            }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<PaymentsDbContext>();
+                db.Database.Migrate();
+            }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<UserContext>();
+                db.Database.Migrate();
+            }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AchievmentsDbContext>();
+                db.Database.Migrate();
+            }
+
             app.UseCors();
             app.UseAuthentication();
             app.UseAuthorization();

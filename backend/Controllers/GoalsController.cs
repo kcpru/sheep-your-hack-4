@@ -1,5 +1,6 @@
 ﻿using backend.DTO;
 using backend.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +22,11 @@ namespace backend.Controllers
             _userRepository = userRepository;
         }
         [HttpGet]
+        [Authorize]
         [Route("all")]
         public async Task<IActionResult> GetAll()
         {
-            string token = Request.Headers["Authorization"].ToString();
+            string token = Request.Headers["Authorization"].ToString()[7..];
             var user = _userRepository.GetUserEmailByToken(token);
 
             var result = await _goalRepository.GetAllGoals(user.Id);
@@ -33,19 +35,24 @@ namespace backend.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("goals/{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var result = await _goalRepository.GetGoalById(id);
+            string token = Request.Headers["Authorization"].ToString()[7..];
+            var user = _userRepository.GetUserEmailByToken(token);
+
+            var result = await _goalRepository.GetGoalById(id, user.Id);
 
             return Ok(result);
         }
 
         [HttpPost]
+        [Authorize]
         [Route("create")]
         public async Task<IActionResult> Create([FromBody] GoalsDTO goal)
         {
-            string token = Request.Headers["Authorization"].ToString();
+            string token = Request.Headers["Authorization"].ToString()[7..];
             var user = _userRepository.GetUserEmailByToken(token);
 
             var result = await _goalRepository.CreateGoal(goal, user.Id);
@@ -53,10 +60,14 @@ namespace backend.Controllers
         }
 
         [HttpPut]
-        [Route("modify/{id}")]
+        [Authorize]
+        [Route("modify")]
         public async Task<IActionResult> ModifyById([FromBody] GoalsDTO goal)
         {
-            var result = await _goalRepository.ModifyGoal(goal);
+            string token = Request.Headers["Authorization"].ToString()[7..];
+            var user = _userRepository.GetUserEmailByToken(token);
+
+            var result = await _goalRepository.ModifyGoal(goal, user.Id);
             if (!result)
             {
                 return NotFound();
@@ -65,10 +76,14 @@ namespace backend.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("delete/{id}")]
         public async Task<IActionResult> DeleteById([FromRoute] int id)
         {
-            var result = await _goalRepository.DeleteGoal(id);
+            string token = Request.Headers["Authorization"].ToString()[7..];
+            var user = _userRepository.GetUserEmailByToken(token);
+
+            var result = await _goalRepository.DeleteGoal(id, user.Id);
             if (!result)
             {
                 return NotFound();

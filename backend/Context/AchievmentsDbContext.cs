@@ -3,12 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Context
 {
-    public class GoalsDbContext : DbContext
+    public class AchievmentsDbContext : DbContext
     {
-        public GoalsDbContext(DbContextOptions<GoalsDbContext> opt) : base(opt)
+        public AchievmentsDbContext(DbContextOptions<AchievmentsDbContext> opt) : base(opt)
         {
+
         }
-        public DbSet<Goals> Goals { get; set; }
+        public DbSet<Achievments> Achievments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

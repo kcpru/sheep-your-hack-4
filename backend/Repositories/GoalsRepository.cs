@@ -29,9 +29,11 @@ namespace backend.Repositories
             return MapToDto(goals);
         }
 
-        public async Task<IEnumerable<GoalsDTO>> GetGoalById(int goalId)
+        public async Task<IEnumerable<GoalsDTO>> GetGoalById(int goalId, int userId)
         {
-            var goals = await _context.Goals.Where(x => x.Id == goalId).ToListAsync();
+            var goals = await _context.Goals.Where(
+                x => x.Id == goalId
+                && x.UserId == userId).ToListAsync();
             return MapToDto(goals);
         }
 
@@ -67,9 +69,11 @@ namespace backend.Repositories
             };
         }
 
-        public async Task<bool> ModifyGoal(GoalsDTO goal)
+        public async Task<bool> ModifyGoal(GoalsDTO goal, int userId)
         {
-            var entity = await _context.Goals.FirstOrDefaultAsync(x => x.Id == goal.Id);
+            var entity = await _context.Goals.FirstOrDefaultAsync(
+                x => x.Id == goal.Id
+                && x.UserId == userId);
             if (entity == null)
             {
                 return false;
@@ -85,9 +89,11 @@ namespace backend.Repositories
             return true;
         }
 
-        public async Task<bool> DeleteGoal(int id)
+        public async Task<bool> DeleteGoal(int id, int userId)
         {
-            var goal = await _context.Goals.FirstOrDefaultAsync(x => x.Id == id);
+            var goal = await _context.Goals.FirstOrDefaultAsync(
+                x => x.Id == id
+                && x.UserId == userId);
             if (goal == null)
             {
                 return false;

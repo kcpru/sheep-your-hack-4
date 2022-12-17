@@ -10,30 +10,18 @@ namespace backend.Controllers
     [EnableCors("AllowAll")]
     [Route("[controller]")]
     [ApiController]
-    public class IncomesController : ControllerBase
+    public class AchievmentsController : ControllerBase
     {
-        private readonly IPaymentRepository _paymentRepository;
+        private readonly IAchievmentsRepository _achievmentsRepository;
         private readonly IUserRepository _userRepository;
 
-        public IncomesController(
-            IPaymentRepository paymentRepository,
+        public AchievmentsController(
+            IAchievmentsRepository achievmentsRepository,
             IUserRepository userRepository)
         {
-            _paymentRepository = paymentRepository;
+            _achievmentsRepository = achievmentsRepository;
             _userRepository = userRepository;
         }
-        [HttpPost]
-        [Authorize]
-        [Route("create")]
-        public async Task<IActionResult> Insert([FromBody] IncomesDTO income)
-        {
-            string token = Request.Headers["Authorization"].ToString()[7..];
-            var user = _userRepository.GetUserEmailByToken(token);
-
-            await _paymentRepository.InsertIncome(income, user.Id);
-            return Ok();
-        }
-
         [HttpGet]
         [Authorize]
         [Route("all")]
@@ -42,8 +30,20 @@ namespace backend.Controllers
             string token = Request.Headers["Authorization"].ToString()[7..];
             var user = _userRepository.GetUserEmailByToken(token);
 
-            var result = await _paymentRepository.GetAllIncomes(user.Id);
+            var result = await _achievmentsRepository.GetAllAchievments(user.Id);
             return Ok(result);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("create")]
+        public async Task<IActionResult> Insert([FromBody] AchievmentsDTO achievment)
+        {
+            string token = Request.Headers["Authorization"].ToString()[7..];
+            var user = _userRepository.GetUserEmailByToken(token);
+
+            await _achievmentsRepository.InsertAchievment(achievment, user.Id);
+            return Ok();
         }
     }
 }

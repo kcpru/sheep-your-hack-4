@@ -1,5 +1,6 @@
 ﻿using backend.DTO;
 using backend.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +23,11 @@ namespace backend.Controllers
             _userRepository = userRepository;
         }
         [HttpPost]
+        [Authorize]
         [Route("create")]
         public async Task<IActionResult> Insert([FromBody] ExpensesDTO expens)
         {
-            string token = Request.Headers["Authorization"].ToString();
+            string token = Request.Headers["Authorization"].ToString()[7..];
             var user = _userRepository.GetUserEmailByToken(token);
 
             await _paymentRepository.InsertExpense(expens, user.Id);
@@ -33,10 +35,11 @@ namespace backend.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("all")]
         public async Task<IActionResult> GetAll()
         {
-            string token = Request.Headers["Authorization"].ToString();
+            string token = Request.Headers["Authorization"].ToString()[7..];
             var user = _userRepository.GetUserEmailByToken(token);
 
             var result = await _paymentRepository.GetAllExpenses(user.Id);

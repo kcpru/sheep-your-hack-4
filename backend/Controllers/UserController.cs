@@ -77,10 +77,11 @@ namespace backend.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("getuser")]
         public ActionResult<UserInfoResult> GetUser()
         {
-            string token = Request.Headers["Authorization"].ToString();
+            string token = Request.Headers["Authorization"].ToString()[7..];
             ClaimsPrincipal? principal = jwtManager.GetPrincipalFromToken(token, false);
 
             if (principal == null || principal.Identity == null || principal.Identity.Name == null)
