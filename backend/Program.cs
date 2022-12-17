@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
+using Microsoft.AspNetCore.Mvc;
 
 namespace backend
 {
@@ -23,6 +24,12 @@ namespace backend
             builder.Services.AddScoped<IGoalsRepository, GoalsRepository>();
             builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://example.com"));
+            });
 
             builder.Services.AddLogging(configure =>
             {
@@ -49,7 +56,9 @@ namespace backend
 
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+
             WebApplication? app = builder.Build();
+            //app.MigrationDatabase();
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();

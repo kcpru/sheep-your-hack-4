@@ -41,9 +41,9 @@ namespace backend.Controllers
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> Create([FromBody] GoalsDTO goal)
+        public ActionResult Create([FromBody] GoalsDTO goals)
         {
-            var result = await _goalRepository.CreateGoal(goal);
+            var result = _goalRepository.CreateGoal(goals).Result;
             if (result)
                 return Ok();
             else

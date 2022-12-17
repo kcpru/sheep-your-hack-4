@@ -12,8 +12,8 @@ using backend.Context;
 namespace backend.Migrations.GoalsDb
 {
     [DbContext(typeof(GoalsDbContext))]
-    [Migration("20221216210942_AddedExpensesGoalsIncome")]
-    partial class AddedExpensesGoalsIncome
+    [Migration("20221217013037_RestoreTable")]
+    partial class RestoreTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
