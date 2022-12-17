@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react'
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useLocation,
+  useSearchParams,
+} from 'react-router-dom'
+
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { Header, Layout } from './components'
 
@@ -29,6 +37,7 @@ const App = () => {
     <AuthContextProvider>
       <BrowserRouter>
         {PATHS_WITH_NAV.includes(path) && <Header />}
+
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />

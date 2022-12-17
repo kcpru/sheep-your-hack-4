@@ -55,6 +55,9 @@ const Header: HeaderComponent = () => {
         alignItems={'center'}
         justifyContent={'center'}
         borderColor="orange.200"
+        _hover={{
+          bg:"orange.200"
+        }}
       >
         <Icon as={HiSwitchVertical} fontSize="4xl" color="orange.400" />
 
