@@ -1,29 +1,67 @@
 import http from './httpService'
 
 const AUTH_URL = ''
-
-type LoginResponse = any
-
-export async function login(username: string, password: string) {
-  try {
-    const res = await http.post<LoginResponse>(AUTH_URL + '/login', {
-      body: JSON.stringify({ username, password }),
-    })
-  } catch (e) {
-    if (e instanceof Error) console.log(e.message)
-  }
+export interface ILoginResponse {
+  code: string
+  message: string
+  token: string
+  refreshToken: string
+  id: string
+  nickname: string
+  email: string
 }
 
-type RegisterResponse = any
+export interface IRegisterResponse {
+  code: string
+  message: string
+  Id: string
+}
 
-export async function register(
-  username: string,
-  email: string,
+type TAccountType = 'kid' | 'adult'
+
+export type TLoginInput = {
+  email: string
   password: string
-) {
+}
+
+export type TRegisterInput = {
+  username: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  passwordConfirm: string
+  // Type: TAccountType
+}
+
+function saveToken(token: string) {
+  localStorage.setItem('token', token)
+}
+
+export async function login(data: TLoginInput) {
+  let result: ILoginResponse | null
   try {
-    const res = await http.post<RegisterResponse>(AUTH_URL + '/register', {
-      body: JSON.stringify({ username, email, password }),
+    const res = await http.post<ILoginResponse>(AUTH_URL + '/login', {
+      body: JSON.stringify(data),
+    })
+
+    if (res !== null) console.error('Failed to login!')
+    saveToken(res?.token as string)
+
+    result = res
+    console.log(res)
+  } catch (e) {
+    if (e instanceof Error) console.log(e.message)
+    result = null
+  }
+
+  return result
+}
+
+export async function register(data: TRegisterInput) {
+  try {
+    await http.post<IRegisterResponse>(AUTH_URL + '/register', {
+      body: JSON.stringify(data),
     })
   } catch (e) {
     if (e instanceof Error) console.error(e.message)
