@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace backend.Migrations.PaymentsDb
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitPaymentsDbContext : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

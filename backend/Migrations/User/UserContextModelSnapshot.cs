@@ -46,6 +46,9 @@ namespace backend.Migrations.User
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("ParentId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");

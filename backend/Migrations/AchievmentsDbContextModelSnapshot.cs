@@ -7,7 +7,7 @@ using backend.Context;
 
 #nullable disable
 
-namespace backend.Migrations.AchievmentsDb
+namespace backend.Migrations
 {
     [DbContext(typeof(AchievmentsDbContext))]
     partial class AchievmentsDbContextModelSnapshot : ModelSnapshot

@@ -12,8 +12,8 @@ using backend.Context;
 namespace backend.Migrations.PaymentsDb
 {
     [DbContext(typeof(PaymentsDbContext))]
-    [Migration("20221217101602_Init")]
-    partial class Init
+    [Migration("20221217141351_InitPaymentsDbContext")]
+    partial class InitPaymentsDbContext
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
