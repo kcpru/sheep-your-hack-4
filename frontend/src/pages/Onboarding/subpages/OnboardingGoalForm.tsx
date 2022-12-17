@@ -61,10 +61,7 @@ const OnboadingGoalForm = () => {
         <Heading as={'h3'} color="gray.600">
           Stwórz swój pierwszy cel!
         </Heading>
-        <Text>
-          Wprowadź twoje miesięczne przychody, na przykład zarobek czy
-          kieszonkowe od rodziców
-        </Text>
+        <Text>Oszczędzanie dzięki Świnkappce nie musi być wcale trudne</Text>
 
         <NavButton onClick={() => handleNextStep()}>Zakończ</NavButton>
       </Container>
