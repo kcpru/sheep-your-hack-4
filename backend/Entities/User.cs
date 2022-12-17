@@ -21,6 +21,7 @@ namespace backend.Entities
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        public string Role { get; set; }
 
         [DataType(DataType.Password)]
         public string Password { get; set; }
@@ -47,6 +48,7 @@ namespace backend.Entities
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
+                Role = dto.Role,
                 Password = password,
                 RefreshToken = string.Empty,
                 RefreshTokenExpiryDate = DateTime.MinValue

@@ -56,12 +56,13 @@ namespace backend.Repositories
         {
             return new Goals()
             {
-                    Id = goal.Id,
-                    Name = goal.Name,
-                    Cost = goal.Cost,
-                    CurrentAmount = goal.CurrentAmount,
-                    Deadline = goal.Deadline,
-                    SavingPerWeek = goal.SavingPerWeek
+                Id = goal.Id,
+                Name = goal.Name,
+                ImageUrl = goal.ImageUrl,
+                Cost = goal.Cost,
+                CurrentAmount = goal.CurrentAmount,
+                Deadline = goal.Deadline,
+                SavingPerWeek = goal.SavingPerWeek
             };
         }
 
@@ -73,10 +74,12 @@ namespace backend.Repositories
                 return false;
             }
             entity.Name = goal.Name;
+            entity.ImageUrl = goal.ImageUrl;
             entity.Cost = goal.Cost;
             entity.CurrentAmount = goal.CurrentAmount;
             entity.Deadline = goal.Deadline;
             entity.SavingPerWeek = goal.SavingPerWeek;
+
             await _context.SaveChangesAsync();
             return true;
         }

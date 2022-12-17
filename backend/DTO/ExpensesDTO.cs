@@ -1,6 +1,6 @@
-﻿namespace backend.Entities
+﻿namespace backend.DTO
 {
-    public class Incomes
+    public class ExpensesDTO
     {
         public int Id { get; set; }
         public int UserId { get; set; }
